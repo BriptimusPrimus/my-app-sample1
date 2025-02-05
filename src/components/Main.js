@@ -1,8 +1,11 @@
 import './Main.css';
+import CalendarPage from './CalendarPage';
 
 function Main() {
     return (
-        <p>Hello World from Main</p>
+        <>
+            <CalendarPage />
+        </>
     )
 }
 
