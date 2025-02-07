@@ -1,3 +1,21 @@
+# Start Here
+
+## Install dependencies
+
+`npm install .`
+
+## Run app
+
+`npm start`
+
+## Read further
+
+The rest of this file is the readme content from `create-react-app`
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

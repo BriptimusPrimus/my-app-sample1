@@ -57,16 +57,75 @@ const createBoard = function ({ width, height, mines }) {
     return board;
 };
 
+function Controls({
+    gameState, 
+    setGameState
+}) {
+    const {
+        width,
+        height,
+        mines,
+        gameOver,
+        points
+    } = gameState;
+
+
+    return (
+        <section className='controls'>
+            <div className='controls__display'>
+                <p className="display__points">
+                    {points}
+                </p>
+                <p className='display__status'>
+                    {gameOver ? 'GAME OVER' : 'PLAY NEXT MOVE'}    
+                </p>            
+            </div>
+            <div className='controls__input'>
+                <button disabled={!gameOver} >Start!</button>
+                <input
+                    type="number" 
+                    id='height_textbox'
+                    placeholder='height'
+                    value={height} 
+                />
+                <input 
+                    type="number"
+                    id='width_textbox' 
+                    placeholder='width'
+                    value={width}
+                />
+                <input
+                    type="number" 
+                    id='mines_textbox'
+                    placeholder='mines'
+                    value={mines} 
+                />
+            </div>
+        </section>
+    );
+}
+
 function Game() {
     const gameVars = {
         width: 5,
         height: 4,
-        mines: 5
+        mines: 5,
+        gameOver: false,
+        points: 0
     };
 
-    const [board, setBoard] = useState(createBoard(gameVars));
+    const [gameState, setGameState] = useState(gameVars)
+
+    const [board, setBoard] = useState(createBoard(gameState));
+
 
     const openCell = (row, col) => {
+        if (board[row][col].mine) {
+            // GAME OVER
+        } else {
+            // POINTS ++
+        }
+
         setBoard((prevMatrix) => {
             const newMatrix = prevMatrix.map((row) => [...row]);
 
@@ -98,6 +157,10 @@ function Game() {
 
     return (
         <div className="game">
+            <Controls 
+                gameState={gameState}
+                setGameState={setGameState}
+            />
             <Board
                 width={gameVars.width}
                 height={gameVars.height}
@@ -209,6 +272,7 @@ function Cell({
         return (
             <button
                 className="cell cell__flag"
+                onClick={onPrimaryClick}
             >
                 △
             </button>

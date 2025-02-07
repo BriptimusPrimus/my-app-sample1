@@ -4,14 +4,16 @@
 
 main {
     padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+
 }
 
 .game {
     border: 3px dashed purple;
     padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;    
 }
 
 .board  {
@@ -48,4 +50,37 @@ main {
 .cell__open {
     background-color: #eee;
     border: 0.5Spx solid #111;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.controls__display {
+    width: 15rem;
+    display: flex;
+    gap: 2rem;
+    /* border: 2px dashed green; */
+}
+
+.controls__display p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.display__points {
+    color: red;
+}
+
+.controls__input {
+    width: 30rem;
+    display: flex;
+    gap: 1rem;
+    /* border: 2px dashed green;     */
+}
+
+.controls__input input {
+    width: 5rem;
 }
