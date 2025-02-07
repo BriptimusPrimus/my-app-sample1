@@ -8,7 +8,6 @@ main {
 }
 
 .game {
-    border: 3px dashed purple;
     padding: 3rem;
 
     display: flex;
@@ -20,14 +19,12 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-    /* border: 2px dashed blue; */
 }
 
 .row {
     display: flex;
     justify-content: center;
     gap: 0.1rem;
-    /* border: 2px dashed red; */
 }
 
 .cell {
@@ -62,7 +59,6 @@ main {
     width: 15rem;
     display: flex;
     gap: 2rem;
-    /* border: 2px dashed green; */
 }
 
 .controls__display p {
@@ -78,7 +74,6 @@ main {
     width: 30rem;
     display: flex;
     gap: 1rem;
-    /* border: 2px dashed green;     */
 }
 
 .controls__input input {

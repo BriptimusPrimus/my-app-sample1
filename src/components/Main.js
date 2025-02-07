@@ -99,10 +99,10 @@ function Controls({
             </div>
             <div className='controls__input'>
                 <button 
-                    disabled={!gameOver} 
                     onClick={handleStart}
                 >
-                    Start!</button>
+                    {gameOver ? 'Start!' : 'Reset'}
+                </button>
                 <input
                     type="number" 
                     id='height_textbox'
