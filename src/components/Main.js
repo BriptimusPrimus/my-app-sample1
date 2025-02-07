@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Main.css';
 
 function Main() {
@@ -36,7 +36,7 @@ const createBoard = function ({ width, height, mines }) {
 
     const board = Array(height)
         .fill(null)
-        .map(_ => Array(width));
+        .map(_ => Array(width));      
 
     for (let i = 0; i < height; i += 1) {
         for (let j = 0; j < width; j += 1) {
@@ -59,16 +59,33 @@ const createBoard = function ({ width, height, mines }) {
 
 function Controls({
     gameState, 
-    setGameState
+    setGameState,
+    setBoard
 }) {
     const {
         width,
-        height,
         mines,
         gameOver,
         points
     } = gameState;
 
+    const [heightState, setHeighState] = useState(gameState.height);
+    const [widthState, setWidthState] = useState(gameState.width);  
+    const [minesState, setMinesState] = useState(gameState.mines);
+
+    const handleStart = () => {
+        const newState = {
+            ...gameState,
+            gameOver: false,
+            width: Number(widthState),
+            height: Number(heightState),
+            points: 0
+        };
+
+        setGameState(newState);
+
+        setBoard(createBoard(newState));
+    }
 
     return (
         <section className='controls'>
@@ -81,24 +98,37 @@ function Controls({
                 </p>            
             </div>
             <div className='controls__input'>
-                <button disabled={!gameOver} >Start!</button>
+                <button 
+                    disabled={!gameOver} 
+                    onClick={handleStart}
+                >
+                    Start!</button>
                 <input
                     type="number" 
                     id='height_textbox'
                     placeholder='height'
-                    value={height} 
+                    value={heightState}
+                    onInput={(e) => {
+                        setHeighState(e.target.value)
+                    }}
                 />
-                <input 
+                <input
                     type="number"
                     id='width_textbox' 
                     placeholder='width'
-                    value={width}
+                    value={widthState}
+                    onInput={(e) => {
+                        setWidthState(e.target.value)
+                    }}                    
                 />
                 <input
                     type="number" 
                     id='mines_textbox'
                     placeholder='mines'
-                    value={mines} 
+                    value={minesState}
+                    onInput={(e) => {
+                        setMinesState(e.target.value)
+                    }}
                 />
             </div>
         </section>
@@ -120,10 +150,26 @@ function Game() {
 
 
     const openCell = (row, col) => {
+        if (gameState.gameOver) {
+            return;
+        }
+
         if (board[row][col].mine) {
             // GAME OVER
+            setGameState(prevState => {
+                return {
+                    ...prevState,
+                    gameOver: true
+                }
+            });
         } else {
             // POINTS ++
+            setGameState(prevState => {
+                return {
+                    ...prevState,
+                    points: prevState.points + 1
+                };
+            });            
         }
 
         setBoard((prevMatrix) => {
@@ -139,6 +185,10 @@ function Game() {
     }
 
     const setFlag = (row, col) => {
+        if (gameState.gameOver) {
+            return;
+        }
+
         setBoard((prevMatrix) => {
             const newMatrix = prevMatrix.map((row) => [...row]);
 
@@ -151,15 +201,12 @@ function Game() {
         });
     };
 
-    console.log({
-        board
-    });
-
     return (
         <div className="game">
             <Controls 
                 gameState={gameState}
                 setGameState={setGameState}
+                setBoard={setBoard}
             />
             <Board
                 width={gameVars.width}
@@ -262,13 +309,7 @@ function Cell({
         );
     }
 
-    console.log({
-        open,
-        flag,
-        r: flag && !open
-    });
     if (flag && !open) {
-        console.log('yay')
         return (
             <button
                 className="cell cell__flag"
