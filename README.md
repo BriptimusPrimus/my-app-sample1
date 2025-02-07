@@ -8,6 +8,30 @@
 
 `npm start`
 
+
+## Design
+Plain React was used for this building this app.
+The top most component Game holds the game state.
+The board is a matrix of objects representing each of the cells.
+Every time a cell is clicked, the new state of the board is calculated from the previous one.
+Thanks to React virtual DOM, changing a piece of the state would not mean all the existing
+DOM elements would be destroyed and re created.
+
+## Performance optimization
+The app runs well with 100x100 and 200x200. But that's as far as it gets.
+A further optimization would imply to virtualize the board. The user would get a viewport 
+of 20x20 (or similar) and buttons to scroll horizontally and vertically to other parts of 
+the board. The Game component would still hold a complete game state, including all cells
+in the board, but only a subset of the cells would be rendered at a given time.
+
+There was not enough time to implement such an optimization, but I'm confident it would
+support 1000 x 1000 boards and beyond.
+
+## TODO
+Ideally every component should live in its own file, but this was a race against time so 
+all components are on Main.js
+
+
 ## Read further
 
 The rest of this file is the readme content from `create-react-app`

@@ -63,8 +63,6 @@ function Controls({
     setBoard
 }) {
     const {
-        width,
-        mines,
         gameOver,
         points
     } = gameState;
@@ -209,9 +207,6 @@ function Game() {
                 setBoard={setBoard}
             />
             <Board
-                width={gameVars.width}
-                height={gameVars.height}
-                mines={gameVars.mines}
                 board={board}
                 onClickCell={openCell}
                 onSecondaryClickCell={setFlag}
@@ -221,9 +216,6 @@ function Game() {
 }
 
 function Board({
-    width,
-    height,
-    mimes,
     board,
     onClickCell,
     onSecondaryClickCell
@@ -256,9 +248,6 @@ function Row({ row, rowIdx, onClickCell, onSecondaryClickCell }) {
                     <Cell
                         cell={cell}
                         key={idx}
-                        mine={mine}
-                        open={open}
-                        flag={flag}
                         rowIdx={rowIdx}
                         colIdx={idx}
                         onClickCell={onClickCell}
