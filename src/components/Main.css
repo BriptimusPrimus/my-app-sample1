@@ -1,6 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
 main {
     padding: 2rem;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* gap: 2rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.game {
+    border: 3px dashed purple;
+    padding: 3rem;
+}
+
+.board  {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    /* border: 2px dashed blue; */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 0.1rem;
+    /* border: 2px dashed red; */
+}
+
+.cell {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    background-color: #ccc;
+    /* border: none; */
+    border: 0.5px solid #999;
+}
+
+.cell__explode {
+    color: red
+}
+
+.cell__flag {
+    color: green;
+}
+
+.cell__open {
+    background-color: #eee;
+    border: 0.5Spx solid #111;
 }
